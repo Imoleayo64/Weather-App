@@ -4,16 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Weather App</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #e0f7fa;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    button {
+      background: #00796b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #004d40;
+    }
+  </style>
 </head>
 <body>
-  <div class="weather-container">
-    <h1>Weather App</h1>
-    <p>Get real-time temperature for Ibadan</p>
-    <button onclick="getWeather()">Check Weather</button>
-    <div class="weather-info" id="weatherResult"></div>
+  <div class="container">
+    <h1>Weather in Ibadan</h1>
+    <button onclick="getWeather()">Get Temperature 🌤</button>
+    <div class="result" id="weatherResult">Click the button to load temperature</div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    async function getWeather() {
+      const url = 'https://api.open-meteo.com/v1/forecast?latitude=7.38&longitude=3.93&current=temperature_2m';
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        const temp = data.current.temperature_2m;
+        document.getElementById('weatherResult').innerHTML =
+          `Current Temperature in Ibadan: <strong>${temp}°C</strong>`;
+      } catch (err) {
+        document.getElementById('weatherResult').innerText =
+          'Unable to fetch data. Try again.';
+      }
+    }
+  </script>
 </body>
 </html>
