@@ -4,55 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Weather App</title>
-  <style>
-    body {
-      background: #e0f7fa;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .container {
-      text-align: center;
-      padding: 2rem;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    input, button {
-      padding: 10px;
-      font-size: 16px;
-      margin: 5px;
-    }
-    .result {
-      margin-top: 20px;
-      font-size: 18px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="weather-container">
     <h1>Weather App</h1>
-    <input type="text" id="cityInput" placeholder="Enter city" />
-    <button onclick="getWeather()">Check</button>
-    <div class="result" id="weatherResult"></div>
+    <p>Get real-time temperature for Ibadan</p>
+    <button onclick="getWeather()">Check Weather</button>
+    <div class="weather-info" id="weatherResult"></div>
   </div>
-  <script>
-    async function getWeather() {
-      const city = document.getElementById('cityInput').value;
-      const apiKey = 'b6907d289e10d714a6e88b30761fae22';
-      const url = `https://openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-      const res = await fetch(url);
-      const data = await res.json();
-      if (data.main) {
-        document.getElementById('weatherResult').innerText =
-          `Temperature in ${data.name}: ${data.main.temp} °C`;
-      } else {
-        document.getElementById('weatherResult').innerText = 'City not found.';
-      }
-    }
-  </script>
+
+  <script src="script.js"></script>
 </body>
 </html>
